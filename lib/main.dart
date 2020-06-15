@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:fluro/fluro.dart';
 
 import 'package:flutter_best_practice/routers/routers.dart';
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
     Routes.configureRoutes(router);
     Routes.router = router;
 
-    return OKToast(
+    return Container(
       child: MaterialApp(
         title: '微博',
         debugShowCheckedModeBanner: false,
@@ -43,11 +42,6 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: Routes.router.generator,
         home: SplashPage(),
       ),
-      backgroundColor: Colors.black54,
-      textPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-      radius: 20.0,
-      position: ToastPosition.bottom,
-      dismissOtherOnShow: true,
     );
   }
 }

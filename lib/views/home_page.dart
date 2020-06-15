@@ -109,13 +109,14 @@ class _HomePageState extends State<HomePage> {
             children: tabBodies,
           ),
         ),
-        onWillPop: () {
+        onWillPop: () async {
           if (lastPopTime == null || DateTime.now().difference(lastPopTime) > Duration(seconds: 2)) {
             lastPopTime = DateTime.now();
             ToastUtil.show('再按一次退出应用');
+            return false;
           } else {
             lastPopTime = DateTime.now();
-            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+            return true;
           }
         },
       )
