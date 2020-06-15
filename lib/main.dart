@@ -5,15 +5,21 @@ import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:fluro/fluro.dart';
 
-import 'package:flutter_best_practice/routers/application.dart';
 import 'package:flutter_best_practice/routers/routers.dart';
-import 'package:flutter_best_practice/views/splash/splash_page.dart';
+import 'package:flutter_best_practice/views/splash_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // 状态栏透明
+  // 状态栏设置
   if (Platform.isAndroid) {
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xffffffff),
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: Color(0xffffffff),
+      statusBarColor: Colors.black,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light
+    );
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 
@@ -21,20 +27,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp() {
-    final router = Router();
-    Routes.configureRoutes(router);
-    Application.router = router;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final router = Router();
+    Routes.configureRoutes(router);
+    Routes.router = router;
+
     return OKToast(
       child: MaterialApp(
-        title: '抖音',
+        title: '微博',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.white,
         ),
+        onGenerateRoute: Routes.router.generator,
         home: SplashPage(),
       ),
       backgroundColor: Colors.black54,
