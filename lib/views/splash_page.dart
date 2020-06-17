@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   void _initSplash() {
     SpUtil.getInstance();
     Future.delayed(Duration(seconds: 5), () {
-      Navigator.pop(context);
+      //Navigator.pop(context);
       Routes.navigateTo(context, Routes.homePage, clearStack: true);
     });
   }
