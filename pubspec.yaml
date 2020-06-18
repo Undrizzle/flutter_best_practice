@@ -35,6 +35,8 @@ dependencies:
   shared_preferences: ^0.5.7
   # 锁
   synchronized: ^2.2.0
+  # 网络请求
+  dio: ^3.0.9
 
 dev_dependencies:
   flutter_test:

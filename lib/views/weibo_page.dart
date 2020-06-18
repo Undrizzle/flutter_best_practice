@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_best_practice/views/index/weibo_follow_page.dart';
-import 'package:flutter_best_practice/views/index/weibo_hot_page.dart';
+import 'package:flutter_best_practice/views/weibo/weibo_follow_page.dart';
+import 'package:flutter_best_practice/views/weibo/weibo_hot_page.dart';
 
-class IndexPage extends StatefulWidget {
+class WeiboPage extends StatefulWidget {
   @override 
-  _IndexPageState createState() => _IndexPageState();
+  _WeiboPageState createState() => _WeiboPageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
+class _WeiboPageState extends State<WeiboPage> with AutomaticKeepAliveClientMixin {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +19,9 @@ class _IndexPageState extends State<IndexPage> {
       ),
     );
   }
+
+  @override 
+  bool get wantKeepAlive => true;
 }
 
 TabController _controller;

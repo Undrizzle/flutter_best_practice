@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         title: '微博',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.white,
+          primaryColor: Colors.white
         ),
         onGenerateRoute: Routes.router.generator,
         home: SplashPage(),

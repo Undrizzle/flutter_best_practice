@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_best_practice/utils/toast_util.dart';
-import 'package:flutter_best_practice/views/index_page.dart';
+import 'package:flutter_best_practice/views/weibo_page.dart';
 import 'package:flutter_best_practice/views/video_page.dart';
 import 'package:flutter_best_practice/views/find_page.dart';
 import 'package:flutter_best_practice/views/message_page.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   DateTime lastPopTime;
 
   final List<Widget> tabBodies = [
-    IndexPage(),
+    WeiboPage(),
     VideoPage(),
     FindPage(),
     MessagePage(),
@@ -88,8 +88,7 @@ class _HomePageState extends State<HomePage> {
       BottomNavigationBarItem(icon: getTabIcon(4), title: getTabTitle(4)),
     ];
 
-    return SafeArea(
-      child: WillPopScope(
+    return WillPopScope(
         child: Scaffold(
           backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
           bottomNavigationBar: BottomNavigationBar(
@@ -103,9 +102,11 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          body: IndexedStack(
-            index: _tabIndex,
-            children: tabBodies,
+          body: SafeArea(
+            child: IndexedStack(
+              index: _tabIndex,
+              children: tabBodies,
+            ),
           ),
         ),
         onWillPop: () async {
@@ -118,7 +119,6 @@ class _HomePageState extends State<HomePage> {
             return true;
           }
         },
-      )
     );
   }
 }
