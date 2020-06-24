@@ -34,4 +34,36 @@ class UserUtil {
 
     return userInfo;
   }
+
+  static User saveUserInfo(Map data) {
+    if (data != null) {
+      String id = data['id'];
+      String username = data['username'];
+      String nick = data['nick'];
+      String headUrl = data['headurl'];
+      String decs = data['decs'];
+      String gender = data['gender'];
+      String followCount = data['followCount'];
+      String fanCount = data['fanCount'];
+      int ismember = data['ismember'];
+      int isvertify = data['isvertify'];
+
+      SpUtil.putString(SP_USER_ID, id);
+      SpUtil.putString(SP_USER_NAME, username);
+      SpUtil.putString(SP_USER_NICK, nick);
+      SpUtil.putString(SP_USER_HEADURL, headUrl);
+      SpUtil.putString(SP_USER_DESC, decs);
+      SpUtil.putString(SP_USER_GENDER, gender);
+      SpUtil.putString(SP_USER_FOLLOW, followCount);
+      SpUtil.putString(SP_USER_FAN, fanCount);
+      SpUtil.putInt(SP_USER_ISMEMBER, ismember);
+      SpUtil.putInt(SP_USER_ISVERTIFY, isvertify);
+      SpUtil.putBool(SP_IS_ALLOGIN, true);
+    }
+  }
+
+  static bool isLogin() {
+    bool b = SpUtil.getBool(SP_IS_ALLOGIN);
+    return b != null && b;
+  }
 }

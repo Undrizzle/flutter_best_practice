@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/constant/constant.dart';
 import 'package:flutter_best_practice/utils/sp_util.dart';
 import 'package:flutter_best_practice/routers/routers.dart';
+import 'package:flutter_best_practice/utils/user_util.dart';
 
 
 class SplashPage extends StatefulWidget {
@@ -17,8 +18,12 @@ class _SplashPageState extends State<SplashPage> {
   void _initSplash() {
     SpUtil.getInstance();
     Future.delayed(Duration(seconds: 5), () {
-      //Navigator.pop(context);
-      Routes.navigateTo(context, Routes.homePage, clearStack: true);
+      if (!UserUtil.isLogin()) {
+        Routes.navigateTo(context, Routes.loginPage, clearStack: true);
+      } else {
+        //Navigator.pop(context);
+        Routes.navigateTo(context, Routes.homePage, clearStack: true);
+      }
     });
   }
 

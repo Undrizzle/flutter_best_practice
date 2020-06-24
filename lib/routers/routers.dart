@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
 import 'package:flutter_best_practice/views/home_page.dart';
+import 'package:flutter_best_practice/views/mine/login_page.dart';
 
 class Routes {
   static Router router;
   static String homePage = '/homePage';
+  static String loginPage = '/loginPage';
 
   static void configureRoutes(Router router) {
     // 指定路由跳转错误返回页
@@ -18,6 +20,9 @@ class Routes {
 
     router.define(homePage, handler: Handler(
       handlerFunc: (BuildContext context, Map<String, List<String>> params) => HomePage()
+    ));
+    router.define(loginPage, handler: Handler(
+      handlerFunc: (BuildContext context, Map<String, List<String>> params) => LoginPage()
     ));
   }
 

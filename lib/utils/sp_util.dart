@@ -33,9 +33,19 @@ class SpUtil {
     return _prefs.getBool(key) ?? defValue;
   }
 
+  static Future<bool> putBool(String key, bool value) {
+    if (_prefs == null) return null;
+    return _prefs.setBool(key, value);
+  }
+
   static int getInt(String key, {int defValue = 0}) {
     if (_prefs == null) return defValue;
     return _prefs.getInt(key) ?? defValue;
+  }
+
+  static Future<bool> putInt(String key, int value) {
+    if (_prefs == null) return null;
+    return _prefs.setInt(key, value);
   }
 
   static double getDouble(String key, {double defValue = 0.0}) {
@@ -46,6 +56,11 @@ class SpUtil {
   static String getString(String key, {String defValue = ''}) {
     if (_prefs == null) return defValue;
     return _prefs.getString(key) ?? defValue;
+  }
+
+  static Future<bool> putString(String key, String value) {
+    if (_prefs == null) return null;
+    return _prefs.setString(key, value);
   }
 
   static Future<bool> clear() {
