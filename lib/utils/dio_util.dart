@@ -42,15 +42,10 @@ class DioUtil {
         }
       }
     } on DioError catch (error) {
-      Response errorResponse;
-      if (error.response != null) {
-        errorResponse = error.response;
-      } else {
-        errorResponse = Response(statusCode: 201);
-      }
       if (errorCallBack != null) {
-        errorCallBack(errorResponse);
+        errorCallBack(error);
       }
+      return;
     }
 
     String dataStr = json.encode(response.data);
@@ -58,9 +53,9 @@ class DioUtil {
     if (dataMap == null || dataMap['status'] != 200) {
       if (errorCallBack != null) {
         errorCallBack(dataMap['msg'].toString());
-      } else if (successCallBack != null) {
-        successCallBack(dataMap);
-      }
+      } 
+    } else if (successCallBack != null) {
+      successCallBack(dataMap);
     }
   }
 }

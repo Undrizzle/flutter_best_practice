@@ -134,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
             FormData params = FormData.fromMap({'username': _inputAccount, 'password': _inputPassword});
             DioUtil.getInstance().requestHttp(Constant.Login, 'post', params, (data) {
               UserUtil.saveUserInfo(data['data']);
-              ToastUtil.show('登录成功');
               Navigator.pop(context);
               Routes.navigateTo(context, Routes.homePage);
             }, (error) {

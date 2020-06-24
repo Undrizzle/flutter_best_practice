@@ -75,15 +75,16 @@ class _WeiboListWidgetState extends State<WeiboListWidget> with AutomaticKeepAli
       "userId": UserUtil.getUserInfo().id,
     });
 
-    await DioUtil.getInstance().requestHttp(Constant.GetWeibo, 'POST', formData, (data) {
-      WeiboListModel category = WeiboListModel.fromJson(data);
-      contentList.clear();
-      contentList.addAll(category.data.list);
+    await DioUtil.getInstance().requestHttp(Constant.GetWeibo, 'post', formData, (data) {
+      print(data['data']);
+      //WeiboListModel category = WeiboListModel.fromJson(data);
+      //contentList.clear();
+      //contentList.addAll(category.data.list);
       setState(() {
         isRefreshLoading = false;
       });
     }, (error) {
-      print("接口异常：" + error);
+      print("接口异常：" + error.toString());
       setState(() {
         isRefreshLoading = false;
       });
