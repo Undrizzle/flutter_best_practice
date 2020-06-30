@@ -12,7 +12,7 @@ import 'package:flutter_best_practice/utils/user_util.dart';
 import 'package:flutter_best_practice/models/WeiboListModel.dart';
 
 class WeiboListWidget extends StatefulWidget {
-  String mCatId = '';
+  final String mCatId;
 
   WeiboListWidget({Key key, @required this.mCatId}) : super(key: key);
 
@@ -76,10 +76,10 @@ class _WeiboListWidgetState extends State<WeiboListWidget> with AutomaticKeepAli
     });
 
     await DioUtil.getInstance().requestHttp(Constant.GetWeibo, 'post', formData, (data) {
-      print(data['data']);
-      //WeiboListModel category = WeiboListModel.fromJson(data);
-      //contentList.clear();
-      //contentList.addAll(category.data.list);
+      print(data);
+      WeiboListModel category = WeiboListModel.fromJson(data);
+      contentList.clear();
+      contentList.addAll(category.data.list);
       setState(() {
         isRefreshLoading = false;
       });

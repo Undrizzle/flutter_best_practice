@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,6 +37,9 @@ dependencies:
   synchronized: ^2.2.0
   # 网络请求
   dio: ^3.0.9
+  # 视频播放
+  video_player: ^0.10.11+1
+  chewie: ^0.9.10
 
 dev_dependencies:
   flutter_test:

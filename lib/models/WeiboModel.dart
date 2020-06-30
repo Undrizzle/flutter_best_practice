@@ -106,7 +106,7 @@ class UserInfo {
   UserInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nick = json['nick'];
-    headUrl = json['headUrl'];
+    headUrl = json['headurl'];
     decs = json['decs'];
     ismember = json['ismember'];
     isvertify = json['isvertify'];
@@ -116,7 +116,7 @@ class UserInfo {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['nick'] = this.nick;
-    data['headUrl'] = this.headUrl;
+    data['headurl'] = this.headUrl;
     data['decs'] = this.decs;
     data['ismember'] = this.ismember;
     data['isvertify'] = this.isvertify;
