@@ -13,29 +13,46 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-String _inputAccount = '';
-String _inputPassword = '';
-
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _accountController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: _inputAccount,
-      selection: TextSelection.fromPosition(TextPosition(
-        affinity: TextAffinity.downstream,
-        offset: _inputAccount.length
-      ))
-    )
-  );
+  final FocusNode _nodeText1 = FocusNode();
+  final FocusNode _nodeText2 = FocusNode();
+  TextEditingController _accountController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  bool _isClick = false;
 
-  TextEditingController _passwordController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: _inputPassword,
-      selection: TextSelection.fromPosition(TextPosition(
-        affinity: TextAffinity.downstream,
-        offset: _inputPassword.length
-      ))
-    )
-  );
+  @override
+  void initState() {
+    super.initState();
+    _accountController.addListener(_verify);
+    _passwordController.addListener(_verify);
+  }
+
+  void _verify() {
+    String account = _accountController.text;
+    String password = _passwordController.text;
+    bool isClick = false;
+
+    if (account.isNotEmpty && password.isNotEmpty) {
+      isClick = true;
+    }
+
+    if (isClick != _isClick) {
+      setState(() {
+        _isClick = isClick;
+      });
+    }
+  }
+
+  void _login() {
+    FormData params = FormData.fromMap({'username': _accountController.text.trim(), 'password': _passwordController.text.trim()});
+    DioUtil.getInstance().requestHttp(Constant.Login, 'post', params, (data) {
+      UserUtil.saveUserInfo(data['data']);
+      Navigator.pop(context);
+      Routes.navigateTo(context, Routes.homePage);
+    }, (error) {
+      ToastUtil.show(error);
+    });
+  }
 
   @override 
   Widget build(BuildContext context) {
@@ -56,22 +73,32 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                 child: TextFieldWidget(
+                  key: Key('account'),
+                  focusNode: _nodeText1,
                   controller: _accountController,
+                  maxLength: 30,
+                  keyboardType: TextInputType.text,
+                  hintText: '手机号或邮箱',
                   isInputPwd: false,
-                  contentStrCallback: (content) {
-                    _inputAccount = content;
-                    setState(() {});
+                  onSubmitted: (input) {
+                    _nodeText1.unfocus();
+                    FocusScope.of(context).requestFocus(_nodeText2);
                   },
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                 child: TextFieldWidget(
+                  key: Key('password'),
+                  focusNode: _nodeText2,
                   controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  maxLength: 16,
+                  hintText: '请输入登录密码',
                   isInputPwd: true,
-                  contentStrCallback: (content) {
-                    _inputPassword = content;
-                    setState(() {});
+                  onSubmitted: (input) {
+                    _nodeText2.unfocus();
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),
               ),
@@ -128,18 +155,8 @@ class _LoginPageState extends State<LoginPage> {
         disabledElevation: 0,
         highlightElevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        onPressed: (_inputAccount.isEmpty || _inputPassword.isEmpty)
-          ? null
-          : () {
-            FormData params = FormData.fromMap({'username': _inputAccount, 'password': _inputPassword});
-            DioUtil.getInstance().requestHttp(Constant.Login, 'post', params, (data) {
-              UserUtil.saveUserInfo(data['data']);
-              Navigator.pop(context);
-              Routes.navigateTo(context, Routes.homePage);
-            }, (error) {
-              ToastUtil.show(error);
-            });
-          },
+        onPressed: _isClick
+          ? _login : null,
         child: Padding(
           padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
           child: Text(

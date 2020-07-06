@@ -137,7 +137,7 @@ class _VideoWidgetState extends State<VideoWidget> {
           Align(
             child: IconButton(
               iconSize: 45.0,
-              icon: Image.asset(Constant.ASSETS_IMG + (_controller.value.isPlaying ? 'ic_pause.png' : 'ic_playing.png')),
+              icon: _controller.value.isPlaying ? null : Image.asset(Constant.ASSETS_IMG + 'ic_playing.png'),
               onPressed: () {
                 if (_controller.value.isPlaying) {
                   _controller.pause();

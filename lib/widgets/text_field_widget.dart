@@ -1,19 +1,33 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 import 'package:flutter_best_practice/constant/constant.dart';
 
-typedef void ITextFieldCallBack(String content);
-
 class TextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
+  final int maxLength;
+  final bool autoFocus;
+  final TextInputType keyboardType;
+  final String hintText;
+  final FocusNode focusNode;
+  final void Function(String) onSubmitted;
   final bool isInputPwd;
-  final ITextFieldCallBack contentStrCallback;
+  final KeyboardActionsConfig config;
 
   TextFieldWidget({
     Key key,
     @required this.controller,
+    this.maxLength = 16,
+    this.autoFocus = false,
+    this.keyboardType = TextInputType.text,
+    this.hintText = "",
+    this.focusNode,
+    this.onSubmitted,
     this.isInputPwd = false,
-    this.contentStrCallback
+    this.config
   }) : super(key: key);
 
   @override 
@@ -47,11 +61,19 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       child: Theme(
         data: ThemeData(highlightColor: Colors.transparent, splashColor: Colors.transparent),
         child: TextField(
+          focusNode: widget.focusNode,
+          maxLength: widget.maxLength,
+          autofocus: widget.autoFocus,
+          onSubmitted: widget.onSubmitted,
           controller: widget.controller,
+          textInputAction: TextInputAction.done,
+          keyboardType: widget.keyboardType,
+          inputFormatters: (widget.keyboardType == TextInputType.number || widget.keyboardType == TextInputType.phone) ?
+              [WhitelistingTextInputFormatter(RegExp("[0-9]"))] : [BlacklistingTextInputFormatter(RegExp("[\u4e00-\u9fa5]"))],
           style: TextStyle(color: Color(0xff333333), fontSize: 14),
           decoration: InputDecoration(
             counterText: "",
-            hintText: widget.isInputPwd ? "请输入登录密码" : "手机号或邮箱",
+            hintText: widget.hintText,
             contentPadding: EdgeInsets.only(left: 0.0, top: 14.0, bottom: 14.0),
             hintStyle: TextStyle(color: Color(0xff8c8c8c), fontSize: 14),
             focusedBorder: UnderlineInputBorder(
@@ -75,23 +97,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                       height: 14.0,
                     ),
                     onPressed: () {
-                      setState(() {
-                        widget.controller.text = '';
-                        widget.contentStrCallback(widget.controller.text);
-                      });
+                      WidgetsBinding.instance.addPostFrameCallback((_) => widget.controller.text = '');
                     },
                   ),
                 )
-              : Text('')  
+              : Text('')
           ),
-          onChanged: (str) {
-            setState(() {
-              widget.controller.text = str;
-              widget.contentStrCallback(widget.controller.text);
-            });
-          },
-          keyboardType: TextInputType.text,
-          maxLength: 20,
           maxLines: 1,
           obscureText: widget.isInputPwd ? true : false,
         ),

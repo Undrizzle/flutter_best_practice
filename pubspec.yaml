@@ -40,6 +40,8 @@ dependencies:
   # 视频播放
   video_player: ^0.10.11+1
   chewie: ^0.9.10
+  # 键盘
+  keyboard_actions: ^3.2.1+1
 
 dev_dependencies:
   flutter_test:
