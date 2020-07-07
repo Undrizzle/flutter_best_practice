@@ -68,8 +68,8 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override 
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   Widget getPreviewImg() {
@@ -135,17 +135,15 @@ class _VideoWidgetState extends State<VideoWidget> {
       child: Stack(
         children: <Widget>[
           Align(
-            child: IconButton(
-              iconSize: 45.0,
-              icon: _controller.value.isPlaying ? null : Image.asset(Constant.ASSETS_IMG + 'ic_playing.png'),
-              onPressed: () {
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  _controller.play();
-                }
-              },
-            ),
+            child: _controller.value.isPlaying
+                ? null
+                : IconButton(
+                    iconSize: 45.0,
+                    icon: Image.asset(Constant.ASSETS_IMG + 'ic_playing.png'),
+                    onPressed: () {
+                        _controller.play();
+                    },
+                  ),
             alignment: Alignment.center,
           ),
           getProgressContent(),
