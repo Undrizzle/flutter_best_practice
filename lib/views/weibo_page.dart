@@ -34,7 +34,7 @@ class TabBarWidget extends StatefulWidget {
 class _TabBarWidgetState extends State<TabBarWidget> {
   final List<String> _tabValues = [
     '关注',
-    '热门',
+    '推荐',
   ];
 
   @override

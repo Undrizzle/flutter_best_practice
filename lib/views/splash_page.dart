@@ -19,9 +19,10 @@ class _SplashPageState extends State<SplashPage> {
     SpUtil.getInstance();
     Future.delayed(Duration(seconds: 5), () {
       if (!UserUtil.isLogin()) {
-        Routes.navigateTo(context, Routes.loginPage, clearStack: true);
+        //Routes.navigateTo(context, Routes.loginPage, clearStack: true);
+        Routes.navigateTo(context, Routes.homePage, clearStack: true);
       } else {
-        //Navigator.pop(context);
+        Navigator.pop(context);
         Routes.navigateTo(context, Routes.homePage, clearStack: true);
       }
     });
