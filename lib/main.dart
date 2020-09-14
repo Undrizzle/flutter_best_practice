@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as fluro;
 
 import 'package:flutter_best_practice/routers/routers.dart';
 import 'package:flutter_best_practice/views/splash_page.dart';
@@ -28,7 +28,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final router = Router();
+    final router = fluro.Router();
     Routes.configureRoutes(router);
     Routes.router = router;
 
