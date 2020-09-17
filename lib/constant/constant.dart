@@ -11,6 +11,6 @@ class Constant {
   static const String UpdateNick = BaseUrl + 'manage/hruser/updateNcik.do';
   static const String UpdateIntroduce = BaseUrl + 'manage/hrUser/updatePersonSign.do';
   static const String GetUserInfo = BaseUrl + 'manage/hrlUser/get_user_info.do';
-
+  static const String getVideoRecommendList = BaseUrl + 'manage/hrlvideo/recommendlist.do';
 
 }
