@@ -42,6 +42,8 @@ dependencies:
   chewie: ^0.9.10
   # 键盘
   keyboard_actions: ^3.2.1+1
+  # 轮播插件
+  flutter_swiper: ^1.1.6
 
 dev_dependencies:
   flutter_test:

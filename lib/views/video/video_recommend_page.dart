@@ -57,7 +57,7 @@ class _VideoRecommendPageState extends State<VideoRecommendPage> {
       ishasMore = true;
       mCurPage = 1;
       FormData params = FormData.fromMap({'pageNum': '$mCurPage', 'pageSize': '10'});
-      DioUtil.getInstance().requestHttp(Constant.getVideoRecommendList, 'post', params, (data) {
+      DioUtil.getInstance().requestHttp(Constant.GetVideoRecommendList, 'post', params, (data) {
         List<VideoModel> list = List();
         data['data']['list'].forEach((data) {
           list.add(VideoModel.fromJson(data));
@@ -68,7 +68,7 @@ class _VideoRecommendPageState extends State<VideoRecommendPage> {
       }, (error) {});
     } else {
       FormData params = FormData.fromMap({'pageNum': '$mCurPage', 'pageSize': '10'});
-      DioUtil.getInstance().requestHttp(Constant.getVideoRecommendList, 'post', params, (data) {
+      DioUtil.getInstance().requestHttp(Constant.GetVideoRecommendList, 'post', params, (data) {
         List<VideoModel> list = List();
         data['data']['list'].forEach((data) {
           list.add(VideoModel.fromJson(data));
