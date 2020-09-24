@@ -15,4 +15,5 @@ class Constant {
   static const String GetVideoHotList = BaseUrl + 'manage/hrlvedio/hotlist.do';
   static const String GetVideoHotBannerAdList = BaseUrl + 'manage/hrlvedio/hotbannerad.do';
   static const String GetVideoSmallList = BaseUrl + 'manage/hrlvedio/samllVideolist.do';
+  static const String GetVideoDetailRecommendList = BaseUrl + 'manage/hrlvedio/videodetailrecommendlist.do';
 }
